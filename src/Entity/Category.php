@@ -37,9 +37,16 @@ class Category
     #[ORM\OneToMany(targetEntity: Posts::class, mappedBy: 'category')]
     private Collection $tags;
 
+    /**
+     * @var Collection<int, Projects>
+     */
+    #[ORM\OneToMany(targetEntity: Projects::class, mappedBy: 'category')]
+    private Collection $projects;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,6 +138,36 @@ class Category
             // set the owning side to null (unless already changed)
             if ($tag->getCategory() === $this) {
                 $tag->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projects>
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Projects $project): static
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
+            $project->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Projects $project): static
+    {
+        if ($this->projects->removeElement($project)) {
+            // set the owning side to null (unless already changed)
+            if ($project->getCategory() === $this) {
+                $project->setCategory(null);
             }
         }
 

@@ -5,10 +5,18 @@
 {% block body %}
 
 <div class="example-wrapper">
-    <h1>Marc Young </h1>
     <h2>Full Stack PHP Web Developer</h2>
 
     <p>Welcome to my Portfolio!</p>
+
+    <article>
+        <h3>Jello blog</h3>
+        {% for post in posts %}
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.excerpt }}</p>
+        {% endfor %}
+    </article>
+
 
 </div>
 {% endblock %}
