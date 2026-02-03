@@ -71,6 +71,10 @@ class AppFixtures extends Fixture
         $project->setStatus([PostStatus::PUBLISHED]);
         $project->setCreatedDate(new \DateTimeImmutable());
         $project->setUpdatedAt(new \DateTimeImmutable());
+        $project->setLink('reddit.com');
+        $project->setGitHubLink('https://github.com/mdyoung3/swiss-army-app');
+        $project->setFeatured(true);
+        $project->setDisplayOrder(1);
 
         $manager->persist($project);
 
@@ -81,6 +85,10 @@ class AppFixtures extends Fixture
         $project->setStatus([PostStatus::PUBLISHED]);
         $project->setCreatedDate(new \DateTimeImmutable());
         $project->setUpdatedAt(new \DateTimeImmutable());
+        $project->setLink('marcyoung.com');
+        $project->setGitHubLink('https://github.com/mdyoung3/swiss-army-app');
+        $project->setFeatured(false);
+        $project->setDisplayOrder(2);
 
         $manager->persist($project);
 
