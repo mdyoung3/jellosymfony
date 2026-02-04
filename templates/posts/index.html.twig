@@ -12,7 +12,7 @@
     {% else %}
         {% for post in posts %}
         <article>
-            <h2><a href="{{ path('app_posts_show', {slug: post.slug}) }}">{{ post.title }}</a></h2>
+            <h2><a href="{{ path('app_posts_show', {id: post.id}) }}">{{ post.title }}</a></h2>
             <p>{{ post.excerpt }}</p>
             <p>
                 <small>

@@ -67,7 +67,7 @@ class AppFixtures extends Fixture
         $project = New Projects;
         $project->setName('IFDM');
         $project->setContent("This is the project of my discontent.");
-        $project->setSlug('project/ifdm');
+        $project->setSlug('ifdm');
         $project->setStatus([PostStatus::PUBLISHED]);
         $project->setCreatedDate(new \DateTimeImmutable());
         $project->setUpdatedAt(new \DateTimeImmutable());
@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
         $project = New Projects;
         $project->setName('middleware');
         $project->setContent("Connects legacy dataset with newer thing using graph");
-        $project->setSlug('project/middleware');
+        $project->setSlug('middleware');
         $project->setStatus([PostStatus::PUBLISHED]);
         $project->setCreatedDate(new \DateTimeImmutable());
         $project->setUpdatedAt(new \DateTimeImmutable());

@@ -23,8 +23,6 @@ final class CategoryController extends AbstractController
     {
         $category = $categoryRepository->find($id);
 
-//        dd($category);
-
         return $this->render('categories/show.html.twig', [
             'category' => $category,
         ]);

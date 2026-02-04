@@ -18,11 +18,13 @@ final class ProjectsController extends AbstractController
         ]);
     }
 
-    #[Route('/projects/{slug}', name: 'app_projects_show')]
-    public function show(Projects $project): Response
+    #[Route('/projects/{id}', name: 'app_projects_show')]
+    public function show($id): Response
     {
+        dd($id);
+
         return $this->render('projects/show.html.twig', [
-            'project' => $project,
+            'project' => $projects,
         ]);
     }
 }

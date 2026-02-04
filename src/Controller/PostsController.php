@@ -18,11 +18,15 @@ final class PostsController extends AbstractController
         ]);
     }
 
-    #[Route('/posts/{slug}', name: 'app_posts_show')]
-    public function show(Posts $post): Response
+    #[Route('/posts/{id<\d+>}', name: 'app_posts_show')]
+    public function show($id, PostsRepository $postsRepository): Response
     {
+        if ($postsRepository === null){
+            throw $this->createNotFoundException('Post not found.');
+        }
+
         return $this->render('posts/show.html.twig', [
-            'post' => $post,
+            'post' => $postsRepository->find($id),
         ]);
     }
 }
