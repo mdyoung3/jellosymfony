@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <article>
+        <h1>{{ project.name }}</h1>
+
+        {% if project.featured %}
+            <p><mark>Featured Project</mark></p>
+        {% endif %}
+
+        {% if project.featureImage %}
+            <p><img src="{{ project.featureImage }}" alt="{{ project.name }}"></p>
+        {% endif %}
+
+        <p>
+            <small>
+                {% if project.startDate %}
+                    Started: {{ project.startDate|date('F Y') }}
+                {% endif %}
+                {% if project.completedDate %}
+                    | Completed: {{ project.completedDate|date('F Y') }}
+                {% endif %}
+            </small>
+        </p>
+
+        {% if project.category %}
+            <p>Category: <a href="{{ path('app_category_show', {id: project.category.id}) }}">{{ project.category.name }}</a></p>
+        {% endif %}
+
+        {% if project.techStack is not empty %}
+            <p><strong>Tech Stack:</strong> {{ project.techStack|join(', ') }}</p>
+        {% endif %}
+
+        <p>
+            {% if project.gitHubLink %}
+                <a href="{{ project.gitHubLink }}">GitHub</a>
+            {% endif %}
+            {% if project.liveUrl %}
+                | <a href="{{ project.liveUrl }}">Live Site</a>
+            {% endif %}
+            {% if project.demoUrl %}
+                | <a href="{{ project.demoUrl }}">Demo</a>
+            {% endif %}
+            {% if project.link %}
+                | <a href="{{ project.link }}">Link</a>
+            {% endif %}
+        </p>
+
+        <hr>
+
+        <div>
+            {{ project.content|raw }}
+        </div>
+
+        {% if project.screenshot is not empty %}
+            <hr>
+            <h2>Screenshots</h2>
+            {% for screenshot in project.screenshot %}
+                <p><img src="{{ screenshot }}" alt="{{ project.name }} screenshot"></p>
+            {% endfor %}
+        {% endif %}
+
+        <hr>
+
+        <p><a href="{{ path('app_projects') }}">&larr; Back to Projects</a></p>
+    </article>
+</div>
+{% endblock %}

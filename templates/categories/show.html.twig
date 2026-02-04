@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>{{ category.name }}</h1>
+
+    {% if category.description %}
+        <p>{{ category.description }}</p>
+    {% endif %}
+
+    <h2>Posts in this category</h2>
+
+    {% if category.tags is empty %}
+        <p>No posts in this category yet.</p>
+    {% else %}
+        {% for post in category.tags %}
+        <article>
+            <h3><a href="{{ path('app_posts_show', {slug: post.slug}) }}">{{ post.title }}</a></h3>
+            <p>{{ post.excerpt }}</p>
+            <p>
+                <small>
+                    {% if post.publishedAt %}
+                        Published: {{ post.publishedAt|date('F j, Y') }}
+                    {% endif %}
+                </small>
+            </p>
+        </article>
+        {% endfor %}
+    {% endif %}
+
+    <hr>
+
+    <p><a href="{{ path('app_categories') }}">&larr; Back to Categories</a></p>
+</div>
+{% endblock %}

@@ -34,13 +34,13 @@ class Category
     /**
      * @var Collection<int, Posts>
      */
-    #[ORM\OneToMany(targetEntity: Posts::class, mappedBy: 'category')]
+    #[ORM\OneToMany(targetEntity: Posts::class, mappedBy: 'categories')]
     private Collection $tags;
 
     /**
      * @var Collection<int, Projects>
      */
-    #[ORM\OneToMany(targetEntity: Projects::class, mappedBy: 'category')]
+    #[ORM\OneToMany(targetEntity: Projects::class, mappedBy: 'categories')]
     private Collection $projects;
 
     public function __construct()

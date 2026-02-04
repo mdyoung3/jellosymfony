@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tags{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Tags</h1>
+
+    {% if tags is empty %}
+        <p>No tags found.</p>
+    {% else %}
+        <ul>
+            {% for tag in tags %}
+                <li>
+                    <a href="{{ path('app_tags_show', {slug: tag.slug}) }}">{{ tag.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</div>
+{% endblock %}

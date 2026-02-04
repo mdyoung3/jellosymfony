@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Projects;
+use App\Repository\ProjectsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -9,10 +11,18 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ProjectsController extends AbstractController
 {
     #[Route('/projects', name: 'app_projects')]
-    public function index(): Response
+    public function index(ProjectsRepository $projectsRepository): Response
     {
         return $this->render('projects/index.html.twig', [
-            'controller_name' => 'ProjectsController',
+            'projects' => $projectsRepository->findBy([], ['displayOrder' => 'ASC']),
+        ]);
+    }
+
+    #[Route('/projects/{slug}', name: 'app_projects_show')]
+    public function show(Projects $project): Response
+    {
+        return $this->render('projects/show.html.twig', [
+            'project' => $project,
         ]);
     }
 }

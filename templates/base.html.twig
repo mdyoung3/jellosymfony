@@ -16,6 +16,13 @@
     <header>
         <h1>Marc Young</h1>
         <p>Welcome to my website!</p>
+        <nav>
+            <ul>
+                <li><a href="{{ path('app_home') }}">Home</a></li>
+                <li><a href="{{ path('app_posts') }}">Posts</a></li>
+                <li><a href="{{ path('app_projects') }}">Projects</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         {% block body %}{% endblock %}

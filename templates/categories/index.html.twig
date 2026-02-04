@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Categories</h1>
+
+    {% if categories is empty %}
+        <p>No categories found.</p>
+    {% else %}
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <a href="{{ path('app_category_show', {id: category.id}) }}">{{ category.name }}</a>
+                    {% if category.description %}
+                        <br><small>{{ category.description }}</small>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</div>
+{% endblock %}

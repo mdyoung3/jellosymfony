@@ -1,20 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProjectsController!{% endblock %}
+{% block title %}Projects{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Projects</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/var/www/html/src/Controller/ProjectsController.php</code></li>
-        <li>Your template at <code>/var/www/html/templates/projects/index.html.twig</code></li>
-    </ul>
+    {% if projects is empty %}
+        <p>No projects found.</p>
+    {% else %}
+        {% for project in projects %}
+        <article>
+            <h2><a href="{{ project.slug }}">{{ project.name }}</a></h2>
+
+            {% if project.featureImage %}
+                <p><img src="{{ project.featureImage }}" alt="{{ project.name }}"></p>
+            {% endif %}
+
+            <p>{{ project.content|slice(0, 200) }}{% if project.content|length > 200 %}...{% endif %}</p>
+
+            {% if project.techStack is not empty %}
+                <p><strong>Tech:</strong> {{ project.techStack|join(', ') }}</p>
+            {% endif %}
+
+            <p>
+                <small>
+                    {% if project.featured %}Featured | {% endif %}
+                    {% if project.category %}
+                        Category: <a href="{{ path('app_category_show', {id: project.category.id}) }}">{{ project.category.name }}</a>
+                    {% endif %}
+                </small>
+            </p>
+        </article>
+        {% endfor %}
+    {% endif %}
+
 </div>
 {% endblock %}

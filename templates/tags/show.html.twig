@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Posts{% endblock %}
+{% block title %}{{ tag.name }}{% endblock %}
 
 {% block body %}
 
 <div class="example-wrapper">
-    <h1>Posts</h1>
+    <h1>Tag: {{ tag.name }}</h1>
 
-    {% if posts is empty %}
-        <p>No posts found.</p>
+    <h2>Posts with this tag</h2>
+
+    {% if tag.agents is empty %}
+        <p>No posts with this tag yet.</p>
     {% else %}
-        {% for post in posts %}
+        {% for post in tag.agents %}
         <article>
-            <h2><a href="{{ path('app_posts_show', {slug: post.slug}) }}">{{ post.title }}</a></h2>
+            <h3><a href="{{ path('app_posts_show', {slug: post.slug}) }}">{{ post.title }}</a></h3>
             <p>{{ post.excerpt }}</p>
             <p>
                 <small>
                     {% if post.publishedAt %}
                         Published: {{ post.publishedAt|date('F j, Y') }}
-                    {% else %}
-                        Created: {{ post.createdAt|date('F j, Y') }}
                     {% endif %}
                     {% if post.category %}
-                        | Category: <a href="{{ path('app_category_show', {id: post.category.id}) }}">{{ post.category.name }}</a>
+                        | Category: <a href="{{ path('app_category_show', {slug: post.category.slug}) }}">{{ post.category.name }}</a>
                     {% endif %}
                 </small>
             </p>
@@ -30,5 +30,8 @@
         {% endfor %}
     {% endif %}
 
+    <hr>
+
+    <p><a href="{{ path('app_tags') }}">&larr; Back to Tags</a></p>
 </div>
 {% endblock %}
