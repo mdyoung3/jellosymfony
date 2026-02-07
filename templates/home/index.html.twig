@@ -9,13 +9,26 @@
 
     <p>Welcome to my Portfolio!</p>
 
-    <article>
-        <h3>Jello blog</h3>
+    <section>
+        <h2>Jello blog</h2>
         {% for post in posts %}
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.excerpt }}</p>
+            <article>
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.excerpt }}</p>
+            </article>
+
         {% endfor %}
-    </article>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+            {% for project in projects %}
+                <article>
+                    <h4>{{ project.name }}</h4>
+                    <p>{{ project.excerpt }}</p>
+                </article>
+            {% endfor %}
+    </section>
 
 
 </div>

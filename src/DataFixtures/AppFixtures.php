@@ -75,6 +75,7 @@ class AppFixtures extends Fixture
         $project->setGitHubLink('https://github.com/mdyoung3/swiss-army-app');
         $project->setFeatured(true);
         $project->setDisplayOrder(1);
+        $project->setExcerpt('This is an example excerpt.');
 
         $manager->persist($project);
 
@@ -89,6 +90,7 @@ class AppFixtures extends Fixture
         $project->setGitHubLink('https://github.com/mdyoung3/swiss-army-app');
         $project->setFeatured(false);
         $project->setDisplayOrder(2);
+        $project->setExcerpt('This is an example excerpt.');
 
         $manager->persist($project);
 

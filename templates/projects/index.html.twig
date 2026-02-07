@@ -12,14 +12,14 @@
     {% else %}
         {% for project in projects %}
         <article>
-            <h2><a href="{{ project.slug }}">{{ project.name }}</a></h2>
+            <h2><a href="{{ path('app_projects_show', {'slug': project.slug}) }}">{{ project.name }}</a></h2>
 
             {% if project.featureImage %}
                 <p><img src="{{ project.featureImage }}" alt="{{ project.name }}"></p>
             {% endif %}
 
             <p>{{ project.content|slice(0, 200) }}{% if project.content|length > 200 %}...{% endif %}</p>
-
+f
             {% if project.techStack is not empty %}
                 <p><strong>Tech:</strong> {{ project.techStack|join(', ') }}</p>
             {% endif %}

@@ -69,6 +69,9 @@ class Projects
     #[ORM\Column]
     private ?int $displayOrder = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $excerpt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -289,6 +292,18 @@ class Projects
     public function setDisplayOrder(int $displayOrder): static
     {
         $this->displayOrder = $displayOrder;
+
+        return $this;
+    }
+
+    public function getExcerpt(): ?string
+    {
+        return $this->excerpt;
+    }
+
+    public function setExcerpt(string $excerpt): static
+    {
+        $this->excerpt = $excerpt;
 
         return $this;
     }

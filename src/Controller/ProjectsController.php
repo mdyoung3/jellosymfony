@@ -18,13 +18,17 @@ final class ProjectsController extends AbstractController
         ]);
     }
 
-    #[Route('/projects/{id}', name: 'app_projects_show')]
-    public function show($id): Response
+    #[Route('/projects/{slug}', name: 'app_projects_show')]
+    public function show(ProjectsRepository $projectsRepository, $slug): Response
     {
-        dd($id);
+        if ($projectsRepository === null){
+            throw $this->createNotFoundException('Post not found.');
+        }
+
+        $project = $projectsRepository->findOneBy(['slug' => $slug]);
 
         return $this->render('projects/show.html.twig', [
-            'project' => $projects,
+            'project' => $project,
         ]);
     }
 }
