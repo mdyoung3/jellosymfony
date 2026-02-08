@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Posts;
 use App\Form\PostType;
 use App\Repository\PostsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -32,10 +34,24 @@ final class PostsController extends AbstractController
     }
 
     #[Route('/posts/new', name: 'app_posts_new')]
-    public function new(PostsRepository $postsRepository, PostType $postType)
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
+        $post = new Posts;
+
+        $form = $this->createForm(PostType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $manager->persist($post);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('app_posts_show');
+        }
+
         return $this->render('posts/new.html.twig', [
-            'form' => $this->createForm(PostType::class)
+            'form' => $form
         ]);
     }
 }
