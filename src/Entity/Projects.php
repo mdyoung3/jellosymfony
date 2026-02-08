@@ -27,7 +27,7 @@ class Projects
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $featureImage = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $link = null;
 
     #[ORM\Column]
@@ -39,7 +39,7 @@ class Projects
     #[ORM\Column]
     private array $techStack = [];
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $gitHubLink = null;
 
     #[ORM\Column(length: 255, nullable: true)]

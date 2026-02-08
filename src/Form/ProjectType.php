@@ -45,7 +45,7 @@ class ProjectType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'id',
             ])
-            ->add('save', SubmitType::class);
+            ->add('save', SubmitType::class, ['label' => 'Add a new project']);
         ;
     }
 

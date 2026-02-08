@@ -21,15 +21,17 @@ final class PostsController extends AbstractController
         ]);
     }
 
-    #[Route('/posts/{id<\d+>}', name: 'app_posts_show')]
-    public function show($id, PostsRepository $postsRepository): Response
+    #[Route('/posts/{slug}', name: 'app_posts_show')]
+    public function show(PostsRepository $postsRepository, $slug): Response
     {
         if ($postsRepository === null){
             throw $this->createNotFoundException('Post not found.');
         }
 
+        $post = $postsRepository->findOneBy(['slug' => $slug]);
+
         return $this->render('posts/show.html.twig', [
-            'post' => $postsRepository->find($id),
+            'post' => $post,
         ]);
     }
 
@@ -38,16 +40,21 @@ final class PostsController extends AbstractController
     {
         $post = new Posts;
 
-        $form = $this->createForm(PostType::class);
+        $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($post);
 
             $manager->flush();
 
-            return $this->redirectToRoute('app_posts_show');
+            $this->addFlash(
+                'notice',
+                'Post created successfully.'
+            );
+
+            return $this->redirectToRoute('app_posts_show', ['slug' => $post->getSlug()]);
         }
 
         return $this->render('posts/new.html.twig', [
