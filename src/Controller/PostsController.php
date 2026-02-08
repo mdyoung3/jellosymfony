@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Posts;
+use App\Form\PostType;
 use App\Repository\PostsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,4 +30,13 @@ final class PostsController extends AbstractController
             'post' => $postsRepository->find($id),
         ]);
     }
+
+    #[Route('/posts/new', name: 'app_posts_new')]
+    public function new(PostsRepository $postsRepository, PostType $postType)
+    {
+        return $this->render('posts/new.html.twig', [
+            'form' => $this->createForm(PostType::class)
+        ]);
+    }
 }
+

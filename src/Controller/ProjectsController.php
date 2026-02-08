@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Projects;
+use App\Form\ProjectType;
 use App\Repository\ProjectsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,14 @@ final class ProjectsController extends AbstractController
     {
         return $this->render('projects/index.html.twig', [
             'projects' => $projectsRepository->findBy([], ['displayOrder' => 'ASC']),
+        ]);
+    }
+
+    #[Route('/projects/new', name: 'app_projects_new')]
+    public function new(ProjectsRepository $projectsRepository, ProjectType $projectType)
+    {
+        return $this->render('projects/new.html.twig', [
+            'form' => $this->createForm(ProjectType::class)
         ]);
     }
 
