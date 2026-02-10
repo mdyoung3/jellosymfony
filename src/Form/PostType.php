@@ -24,12 +24,16 @@ class PostType extends AbstractType
             ->add('featuredImage')
             ->add('createdAt', null, [
                 'widget' => 'single_text',
+                'required' => false,
+                'input' => 'datetime_immutable',
             ])
             ->add('publishedAt', null, [
                 'widget' => 'single_text',
             ])
             ->add('updatedAt', null, [
                 'widget' => 'single_text',
+                'required' => false,
+                'input' => 'datetime_immutable',
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,

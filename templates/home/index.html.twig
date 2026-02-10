@@ -13,7 +13,7 @@
         <h2>Jello blog</h2>
         {% for post in posts %}
             <article>
-                <h4>{{ post.title }}</h4>
+                <h4><a href="{{ path('') }}">{{ post.title }}</a></h4>
                 <p>{{ post.excerpt }}</p>
             </article>
 

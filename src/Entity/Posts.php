@@ -27,7 +27,7 @@ class Posts
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Type('text')]
+    #[Assert\Type('string')]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -144,7 +144,7 @@ class Posts
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -168,7 +168,7 @@ class Posts
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
